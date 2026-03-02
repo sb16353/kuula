@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55351c67edabe5a4ca2a4647436cf0b6, type: 3}
+  m_Name: LevelSetData
+  m_EditorClassIdentifier: 
+  levelSets:
+  - _name:
+      m_TableReference:
+        m_TableCollectionName: GUID:668b6f01d32c9fa449432365723d3b7a
+      m_TableEntryReference:
+        m_KeyId: 349665948450816
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    setNumber: 0
+    levelSceneNames:
+    - level0_1
+    - level0_2
+    - level0_3
+    - level0_4
+    - level0_5
+    - level0_6
+  - _name:
+      m_TableReference:
+        m_TableCollectionName: GUID:668b6f01d32c9fa449432365723d3b7a
+      m_TableEntryReference:
+        m_KeyId: 349777844092928
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    setNumber: 1
+    levelSceneNames:
+    - level1_1
+    - level1_2
+    - level1_3
+    - level1_4
+    - level1_5
+    - level1_6
+  - _name:
+      m_TableReference:
+        m_TableCollectionName: GUID:668b6f01d32c9fa449432365723d3b7a
+      m_TableEntryReference:
+        m_KeyId: 349860807426048
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    setNumber: 2
+    levelSceneNames:
+    - level2_1
+    - level2_2
+    - level2_3
+    - level2_4
+    - level2_5
+    - level2_6
+  references:
+    version: 2
+    RefIds: []

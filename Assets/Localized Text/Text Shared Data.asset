@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Text Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Text
+  m_TableCollectionNameGuidString: 668b6f01d32c9fa449432365723d3b7a
+  m_Entries:
+  - m_Id: 34790202261504
+    m_Key: main/Canvas/Toggle/Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34908234170368
+    m_Key: main/Canvas/BT Asetukset/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35130087686144
+    m_Key: main/Canvas/Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 341651535282176
+    m_Key: LoadingText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 344975147909120
+    m_Key: CanvasTimer/CanvasTimer/Button/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345164080332800
+    m_Key: CanvasGameOver/CanvasGameOver/Game Over/Quit/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345195126571008
+    m_Key: CanvasGameOver/CanvasGameOver/Game Over/Retry/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349665948450816
+    m_Key: LevelsEasy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349777844092928
+    m_Key: LevelsMedium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349860807426048
+    m_Key: LevelsHard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356979975766016
+    m_Key: BluetoothDiscovery/BluetoothDiscoveryUI/Canvas/Search for devices/Button/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357023378423808
+    m_Key: BluetoothDiscovery/OtherUI/MainMenu/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364015564210176
+    m_Key: 'BT_Connecting
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364139874992128
+    m_Key: BT_Connection_Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364270384955392
+    m_Key: BT_Connection_Fail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391155219283968
+    m_Key: victory/Canvas/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391336618737664
+    m_Key: victory/Canvas/Level Set
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4899221780818297120
+  references:
+    version: 2
+    RefIds:
+    - rid: 4899221780818297120
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1749714422336

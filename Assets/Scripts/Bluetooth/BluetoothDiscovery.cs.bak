@@ -1,0 +1,187 @@
+using UnityEngine;
+using TechTweaking.Bluetooth;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using TMPro;
+using System.Text;
+using UnityEngine.SceneManagement;
+using System.Collections;
+
+class DeviceData
+{
+    public BluetoothDevice device;
+
+    public short RSSI;
+
+    public Button button;
+
+    public DeviceData(BluetoothDevice _device, short _RSSI, Button _button)
+    {
+        device = _device;
+        RSSI = _RSSI;
+        button = _button;
+    }
+}
+
+public class BluetoothDiscovery : MonoBehaviour
+{
+    [SerializeField] Button deviceButtonPrefab;
+    [SerializeField] GameObject listOfDiscoveredDevices;
+    [SerializeField] GameObject connectingGraphic;
+
+    void Awake()
+    {   /*
+        if (Application.platform != RuntimePlatform.Android)
+        {
+            SceneManager.LoadScene("main");
+            Destroy(gameObject);
+            return;
+        }   
+        */
+    }
+
+    [SerializeField] RectTransform buttonParent;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        BluetoothAdapter.askEnableBluetooth();
+        BluetoothAdapter.OnDeviceDiscovered += HandleOnDeviceDiscovered;
+
+    }
+
+    void OnEnable()
+    {
+        macAddressToBluetoothDevice.Clear();
+    }
+
+    void OnDestroy()
+    {
+        BluetoothAdapter.OnDeviceDiscovered -= HandleOnDeviceDiscovered;
+    }
+    
+    public static string SelectedMACAddress { get => _selectedMACAddress; }
+    static string _selectedMACAddress;
+
+    public void AttemptToConnect(string _macAddress)
+    {
+        if (string.IsNullOrEmpty(_macAddress))
+            return;
+
+        _selectedMACAddress = _macAddress;
+
+        Debug.Log(_selectedMACAddress);
+
+        StopConnecting();
+
+        listOfDiscoveredDevices.SetActive(false);
+        connectingGraphic.SetActive(true);
+
+        connectCoroutine = StartCoroutine(ConnectCoroutine(_macAddress));
+    }
+
+    private void StopConnecting()
+    {
+        if (connectCoroutine != null)
+            StopCoroutine(connectCoroutine);
+
+        connectCoroutine = null;
+
+        listOfDiscoveredDevices.SetActive(true);
+        connectingGraphic.SetActive(false);
+    }
+
+    Coroutine connectCoroutine;
+
+    private IEnumerator ConnectCoroutine(string _macAddress)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        
+
+        yield break;
+    }
+
+    private void HandleOnDeviceDiscovered(BluetoothDevice _dev, short _RSSI)
+    {
+        DeviceData deviceData;
+
+        if (!macAddressToBluetoothDevice.TryGetValue(_dev.MacAddress, out deviceData))
+        {
+            deviceData = new(_dev, _RSSI, AddButton(_dev.Name, _dev.MacAddress, _RSSI.ToString()));
+            macAddressToBluetoothDevice.Add(_dev.MacAddress, deviceData);
+
+            return;
+        }
+
+        deviceData.RSSI = _RSSI;
+    }
+
+    [SerializeField] GameObject searchButton;
+
+    [SerializeField] Transform searchIcon;
+
+    [SerializeField] float searchIconRotationSpeed = 150.0f;
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        bool searching = IsSearching;
+
+        searchButton.SetActive(!searching);
+        searchIcon.gameObject.SetActive(searching);
+        if(searching)
+            searchIcon.Rotate(Vector3.forward, (searchIconRotationSpeed * Time.deltaTime), Space.Self);
+    }
+
+    public bool IsSearching
+    {
+        get => discoveryCoroutine != null;
+    }
+
+    readonly Dictionary<string, DeviceData> macAddressToBluetoothDevice = new();
+
+    public void StartDiscovery()
+    {
+        StopDiscovery();
+        discoveryCoroutine = StartCoroutine(DiscoveryCoroutine());
+    }
+
+    public void StopDiscovery()
+    {
+        if (discoveryCoroutine != null)
+            StopCoroutine(discoveryCoroutine);
+
+        discoveryCoroutine = null;
+    }
+
+    Coroutine discoveryCoroutine;
+
+    private IEnumerator DiscoveryCoroutine()
+    {
+        BluetoothAdapter.refreshDiscovery();
+        yield return new WaitForSecondsRealtime(10.0f);
+        discoveryCoroutine = null;
+        yield break;
+    }
+
+    private Button AddButton(string _name, string _macAddress, string _RSSI)
+    {
+        GameObject buttonGO = Instantiate(deviceButtonPrefab.gameObject);
+        Button deviceButtonInstance = buttonGO.GetComponent<Button>();
+
+        buttonGO.name = _macAddress;
+
+        RectTransform rectTransform = (RectTransform)buttonGO.transform;
+        rectTransform.SetParent(buttonParent);
+        float buttonHeight = rectTransform.sizeDelta.y;
+        rectTransform.anchoredPosition = new Vector3(0.0f, -(buttonHeight / 2.0f) - (buttonHeight * (buttonParent.childCount - 1)), 0.0f);
+        var contentSize = buttonParent.sizeDelta;
+        contentSize.y += buttonHeight;
+        buttonParent.sizeDelta = contentSize;
+
+        buttonGO.GetComponentInChildren<TMP_Text>().text = _name;//new StringBuilder().AppendLine(_macAddress).AppendLine(_name).Append("RSSI : ").Append(_RSSI).ToString();
+
+        return deviceButtonInstance;
+    }
+}
